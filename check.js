@@ -1,6 +1,6 @@
 function checkEligibility() {
     // Get the age from the input field
-    var age = parseInt(document.getElementById('age').value);
+    var age = document.getElementById('age').value;
 
     // Check eligibility using a simple condition
     if (isNaN(age) || age < 18) {
