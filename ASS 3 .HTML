@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Form Validation</h2>
+  
+  <form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <span id="nameError" class="error"></span><br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+    <span id="emailError" class="error"></span><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      clearErrors();
+      let isValid = true;
+      const nameInput = document.getElementById("name").value.trim();
+      if (nameInput === "") {
+        displayError("name", "Name is required");
+        isValid = false;
+      }
+      const emailInput = document.getElementById("email").value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput === "") {
+        displayError("email", "Email is required");
+        isValid = false;
+      } else if (!emailRegex.test(emailInput)) {
+        displayError("email", "Invalid email format");
+        isValid = false;
+      }
+      if (isValid) {
+        alert("Form submitted successfully!");
+    });
+    function displayError(field, message) {
+      document.getElementById(`${field}Error`).innerText = message;
+    }
+
+    // Function to clear all error messages
+    function clearErrors() {
+      document.getElementById("nameError").innerText = "";
+      document.getElementById("emailError").innerText = "";
+    }
+  </script>
+
+</body>
+</html>
